@@ -1,0 +1,31 @@
+{
+  "name": "delta-webpack-plugin",
+  "version": "0.1.0",
+  "description": "Webpack plugin for improved dependency management. Used by DeltaJS and another component libraries.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teleroot/delta-webpack-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "deltajs"
+  ],
+  "author": "Dmitry Lysenko <delta.npm@gmail.com> (https://github.com/teleroot)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/teleroot/delta-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/teleroot/delta-webpack-plugin#readme",
+  "engines": {
+    "node": ">=7.5.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "webpack": "^4.16.5"
+  }
+}
