@@ -4,8 +4,7 @@ const extractControlsFromFileList = require("./lib/extract-controls").extractCon
 
 const defaultOptions = {
     test: undefined,
-    dependencies: []/*,
-    defaultExtensions: [".js"]*/
+    dependencies: []
 };
 
 
@@ -35,9 +34,7 @@ class DeltaWebpackPlugin {
         };
         if (this.options.templates){
             let templateDependencies = extractControlsFromFileList(undefined, this.options.templates, this.options.templateOptions);
-            //Array.prototype.push.apply(this.options.dependencies, templateDependencies.controls);
-            this.templateDependencies = templateDependencies.controls.map(createPair);
-            //this.templateDependencies = templateDependencies.controls;
+            this.templateDependencies = templateDependencies.map(createPair);
         } else {
             this.templateDependencies = [];
         }
