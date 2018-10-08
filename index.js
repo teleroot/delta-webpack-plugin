@@ -42,22 +42,24 @@ class DeltaWebpackPlugin {
     }
     apply(compiler) {
         const aliases = compiler.options.resolve.alias;
-        const hasDeps = (this.options.dependencies && this.options.dependencies.length) || (this.templateDependencies && this.templateDependencies.length)
+        const hasDeps = (this.options.dependencies && this.options.dependencies.length) ||
+            (this.templateDependencies && this.templateDependencies.length);
+        if (!hasDeps){
+            return;
+        }
         compiler.plugin("compilation", compilation => {
             compilation.plugin("succeed-module", module => {
-
-                if (hasDeps){
-                    if (this.targetFunc(module)){
-                        this.templateDependencies.forEach(dep =>{
-                            helpers.addDependency(null, module, dep[0]);
-                            helpers.addDependency(null, module, dep[1]);
-                        });
-                        this.options.dependencies.forEach(dep =>{
-                            helpers.addDependency(aliases, module, dep[0]);
-                            helpers.addDependency(aliases, module, dep[1]);
-                        })
-                    }
+                if (this.targetFunc(module)){
+                    this.templateDependencies.forEach(dep =>{
+                        helpers.addDependency(null, module, dep[0]);
+                        helpers.addDependency(null, module, dep[1]);
+                    });
+                    this.options.dependencies.forEach(dep =>{
+                        helpers.addDependency(aliases, module, dep[0]);
+                        helpers.addDependency(aliases, module, dep[1]);
+                    })
                 }
+
             })
         })
     }
