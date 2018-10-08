@@ -21,9 +21,12 @@ class DeltaWebpackPlugin {
         } else if (target instanceof RegExp){
             this.targetFunc = function(module){
                 return module instanceof ContextModule &&
-                    module.issuer && module.issuer.request && target.test(module.issuer.request);
+                    module.issuer && module.issuer.request && target.test(module.issuer.request.replace(/\\/g, "/"));
             }
-        } else {
+        } else if (typeof target === "function") {
+            this.targetFunc = target.bind(this);
+        }
+        else {
             this.targetFunc = function(module){
                 return module.request === target;
             }
